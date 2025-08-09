@@ -27,3 +27,15 @@ while True:
     if results.multi_hand_landmarks:
         for hand_landmarks in results.multi_hand_landmarks:
             Hand_detect.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
+        faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=9)
+        
+    for (x, y, w, h) in faces:
+        cv.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 3)
+
+    cv.imshow('face detector', frame)
+
+    if cv.waitKey(1) & 0xFF == ord('q'):
+        break
+
+cap.release()
+cv.destroyAllWindows()
